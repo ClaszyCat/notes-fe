@@ -7,6 +7,7 @@ import {
   NotePage,
   NoteSearchParams,
   ImageUploadResponse,
+  NoteResponse,
 } from "../interfaces/note";
 
 export const NOTE_QUERY_KEYS = {
@@ -47,12 +48,15 @@ export function useCreateNote() {
 
   return useMutation({
     mutationFn: (data: NoteCreate) => NoteService.createNote(data),
-    onSuccess: (newNote: Note) => {
+    onSuccess: (newNote: NoteResponse) => {
       // Invalidate and refetch notes list
       queryClient.invalidateQueries({ queryKey: NOTE_QUERY_KEYS.lists() });
 
       // Add the new note to the detail cache
-      queryClient.setQueryData(NOTE_QUERY_KEYS.detail(newNote.id), newNote);
+      queryClient.setQueryData(
+        NOTE_QUERY_KEYS.detail(newNote.results.id),
+        newNote.results
+      );
     },
   });
 }

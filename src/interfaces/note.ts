@@ -2,10 +2,14 @@ export interface Note {
   id: string;
   title: string;
   body: string;
-  imageUrl?: string | null;
-  ownerId: string;
-  createdAt: string;
-  updatedAt: string;
+  image_url?: string | null;
+  owner_id: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface NoteResponse {
+  results: Note;
 }
 
 export interface NoteCreate {

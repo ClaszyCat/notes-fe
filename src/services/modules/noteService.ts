@@ -6,6 +6,7 @@ import {
   NotePage,
   NoteSearchParams,
   ImageUploadResponse,
+  NoteResponse,
 } from "../../interfaces/note";
 
 export class NoteService {
@@ -55,9 +56,12 @@ export class NoteService {
   /**
    * Create a new note
    */
-  static async createNote(data: NoteCreate): Promise<Note> {
+  static async createNote(data: NoteCreate): Promise<NoteResponse> {
     try {
-      const response = await axiosClient.post<Note>(this.NOTES_BASE_URL, data);
+      const response = await axiosClient.post<NoteResponse>(
+        this.NOTES_BASE_URL,
+        data
+      );
       return response.data;
     } catch (error: any) {
       throw this.handleNoteError(error);

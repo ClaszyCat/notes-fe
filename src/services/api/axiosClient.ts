@@ -15,6 +15,7 @@ class AxiosClient {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials: true, // Enable sending credentials with cross-origin requests
     });
 
     this.initializeRequestInterceptor();
@@ -105,6 +106,7 @@ class AxiosClient {
         ...config?.headers,
         "Content-Type": "multipart/form-data",
       },
+      withCredentials: true, // Ensure credentials are sent with file uploads
     });
   }
 }
